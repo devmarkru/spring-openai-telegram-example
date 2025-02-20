@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: openai-example
+
+  ai:
+    openai:
+      api-key: ${CHATGPT_API_KEY}
+      base-url: https://api.proxyapi.ru/openai
+
+telegram:
+  token: ${TELEGRAM_BOT_TOKEN}
+  botName: ${TELEGRAM_BOT_NAME}
