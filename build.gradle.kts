@@ -50,6 +50,6 @@ tasks.withType<Test> {
 
 tasks {
     bootJar {
-        archiveFileName.set("number2text-bot.jar")
+        archiveFileName.set("openai-bot.jar")
     }
 }
