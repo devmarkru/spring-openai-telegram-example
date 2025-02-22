@@ -5,7 +5,7 @@ spring:
   ai:
     openai:
       api-key: ${CHATGPT_API_KEY}
-      base-url: https://api.proxyapi.ru/openai
+      base-url: ${CHATGPT_BASE_URL:https://api.openai.com}
 
 telegram:
   token: ${TELEGRAM_BOT_TOKEN}
