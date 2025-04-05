@@ -5,6 +5,6 @@
 
 ### Полезные ссылки
 * [Spring AI: пишем telegram-bot для ChatGPT](https://devmark.ru/article/spring-openai-telegram).
-* [dockhost.ru](https://dockhost.ru/?utm_source=devmark&utm_medium=cpa&utm_campaign=devmark) - облачный хостинг по технологии `Push-to-Deploy`.
+* [dockhost.ru](https://dockhost.ru/?utm_source=devmark&utm_medium=cpa&utm_campaign=devmark&p=z8i9gexg) - облачный хостинг по технологии `Push-to-Deploy`.
 * [Новости проекта](https://t.me/+RjrPWNUEwf8wZTMy) и короткие заметки.
 * Ещё больше статей по разработке ПО вы можете найти на моём сайте [devmark.ru](https://devmark.ru/).
