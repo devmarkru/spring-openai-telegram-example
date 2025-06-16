@@ -32,7 +32,7 @@ class TelegramBot(
             if (update.message.hasText()) {
                 val userMessage = update.message.text
                 logger.info { "Message from chatId=$chatId received: $userMessage." }
-                val assistantMessage = openAiService.sendMessages(chatId, userMessage)
+                val assistantMessage = openAiService.processUserMessage(chatId, userMessage)
                 execute(createMessage(chatId.toString(), assistantMessage))
             } else {
                 execute(createMessage(chatId.toString(), "Я понимаю только текст!"))

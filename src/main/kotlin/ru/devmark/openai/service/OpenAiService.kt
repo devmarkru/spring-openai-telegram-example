@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class OpenAiService(private val chatClient: ChatClient) {
-
-    fun sendMessages(chatId: Long, userMessage: String): String {
+    fun processUserMessage(chatId: Long, userMessage: String): String {
         val responseFormat = ResponseFormat.builder()
             .type(ResponseFormat.Type.TEXT)
             .build()
@@ -23,13 +22,12 @@ class OpenAiService(private val chatClient: ChatClient) {
             .responseFormat(responseFormat)
             .build()
 
-        val responseText = chatClient.prompt(Prompt(SystemMessage(SYSTEM_PROMPT), chatOptions))
-            .advisors { advisor -> advisor.param(ChatMemory.CONVERSATION_ID, chatId) }
+        return chatClient.prompt(Prompt(SystemMessage(SYSTEM_PROMPT), chatOptions))
+            .advisors { advisor -> advisor.param(ChatMemory.CONVERSATION_ID, chatId.toString()) }
             .user(userMessage)
             .call()
             .content()
             ?: "Не удалось получить ответ"
-        return responseText
     }
 
     private companion object {
