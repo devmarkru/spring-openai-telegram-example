@@ -1,12 +1,15 @@
 spring:
   application:
     name: openai-example
-
   ai:
     openai:
-      api-key: ${CHATGPT_API_KEY}
-      base-url: ${CHATGPT_BASE_URL:https://api.openai.com}
+      api-key: ${OPEN_AI_API_KEY}
+      base-url: ${OPEN_AI_BASE_URL:https://api.openai.com}
 
 telegram:
   token: ${TELEGRAM_BOT_TOKEN}
   botName: ${TELEGRAM_BOT_NAME}
+
+logging:
+  level:
+    org.springframework.ai.chat.client.advisor: DEBUG
