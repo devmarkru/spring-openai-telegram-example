@@ -1,7 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "1.9.25"
-    id("org.springframework.boot") version "3.5.0"
+    id("org.springframework.boot") version "3.5.4"
     id("io.spring.dependency-management") version "1.1.7"
 }
 
@@ -20,14 +20,17 @@ repositories {
 
 extra["springAiVersion"] = "1.0.0"
 
+val telegramBotsVersion = "9.0.0"
+
 dependencies {
     implementation("org.springframework.ai:spring-ai-starter-model-openai")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
 
     implementation("io.github.microutils:kotlin-logging:3.0.5")
-    implementation("org.telegram:telegrambots-spring-boot-starter:6.9.7.1")
-    implementation("org.telegram:telegrambotsextensions:6.9.0")
+    implementation("org.telegram:telegrambots-springboot-longpolling-starter:$telegramBotsVersion")
+    implementation("org.telegram:telegrambots-client:$telegramBotsVersion")
+    implementation("org.telegram:telegrambots-extensions:$telegramBotsVersion")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")

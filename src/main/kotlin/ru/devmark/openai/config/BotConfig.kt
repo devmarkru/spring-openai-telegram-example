@@ -1,16 +1,15 @@
 package ru.devmark.openai.config
 
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.telegram.telegrambots.meta.TelegramBotsApi
-import org.telegram.telegrambots.updatesreceivers.DefaultBotSession
-import ru.devmark.openai.bot.TelegramBot
+import org.telegram.telegrambots.client.okhttp.OkHttpTelegramClient
+import org.telegram.telegrambots.meta.generics.TelegramClient
 
 @Configuration
 class BotConfig {
     @Bean
-    fun telegramBotsApi(bot: TelegramBot): TelegramBotsApi =
-        TelegramBotsApi(DefaultBotSession::class.java).apply {
-            registerBot(bot)
-        }
+    fun telegramClient(@Value("\${telegram.token}") botToken: String): TelegramClient {
+        return OkHttpTelegramClient(botToken)
+    }
 }

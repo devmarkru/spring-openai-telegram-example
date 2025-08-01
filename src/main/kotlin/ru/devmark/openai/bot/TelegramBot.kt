@@ -3,28 +3,31 @@ package ru.devmark.openai.bot
 import mu.KLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
-import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot
+import org.telegram.telegrambots.extensions.bots.commandbot.CommandLongPollingTelegramBot
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand
+import org.telegram.telegrambots.longpolling.interfaces.LongPollingUpdateConsumer
+import org.telegram.telegrambots.longpolling.starter.SpringLongPollingBot
 import org.telegram.telegrambots.meta.api.objects.Update
+import org.telegram.telegrambots.meta.generics.TelegramClient
 import ru.devmark.openai.service.OpenAiService
 import ru.devmark.openai.util.createMessage
 
 @Component
 class TelegramBot(
     private val openAiService: OpenAiService,
-    commands: Set<BotCommand>,
     @Value("\${telegram.token}")
-    token: String,
-) : TelegramLongPollingCommandBot(token) {
-
-    @Value("\${telegram.botName}")
-    private val botName: String = ""
+    private val tgBotToken: String,
+    telegramClient: TelegramClient,
+    commands: Set<BotCommand>,
+) : SpringLongPollingBot, CommandLongPollingTelegramBot(telegramClient, true, { tgBotToken }) {
 
     init {
         registerAll(*commands.toTypedArray())
     }
 
-    override fun getBotUsername(): String = botName
+    override fun getBotToken(): String = tgBotToken
+
+    override fun getUpdatesConsumer(): LongPollingUpdateConsumer = this
 
     override fun processNonCommandUpdate(update: Update) {
         if (update.hasMessage()) {
@@ -33,9 +36,9 @@ class TelegramBot(
                 val userMessage = update.message.text
                 logger.info { "Message from chatId=$chatId received: $userMessage." }
                 val assistantMessage = openAiService.processUserMessage(chatId, userMessage)
-                execute(createMessage(chatId.toString(), assistantMessage))
+                telegramClient.execute(createMessage(chatId.toString(), assistantMessage))
             } else {
-                execute(createMessage(chatId.toString(), "Я понимаю только текст!"))
+                telegramClient.execute(createMessage(chatId.toString(), "Я понимаю только текст!"))
             }
         }
     }
