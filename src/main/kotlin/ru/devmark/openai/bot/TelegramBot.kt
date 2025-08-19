@@ -1,6 +1,6 @@
 package ru.devmark.openai.bot
 
-import mu.KLogging
+import io.github.oshai.kotlinlogging.KotlinLogging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import org.telegram.telegrambots.extensions.bots.commandbot.CommandLongPollingTelegramBot
@@ -11,6 +11,8 @@ import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.generics.TelegramClient
 import ru.devmark.openai.service.OpenAiService
 import ru.devmark.openai.util.createMessage
+
+private val logger = KotlinLogging.logger {}
 
 @Component
 class TelegramBot(
@@ -43,5 +45,4 @@ class TelegramBot(
         }
     }
 
-    private companion object : KLogging()
 }
