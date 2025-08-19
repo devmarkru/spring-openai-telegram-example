@@ -21,13 +21,14 @@ repositories {
 extra["springAiVersion"] = "1.0.0"
 
 val telegramBotsVersion = "9.0.0"
+val kotlinLoggingVersion = "7.0.12"
 
 dependencies {
     implementation("org.springframework.ai:spring-ai-starter-model-openai")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-web")
 
-    implementation("io.github.microutils:kotlin-logging:3.0.5")
+    implementation("io.github.oshai:kotlin-logging-jvm:$kotlinLoggingVersion")
     implementation("org.telegram:telegrambots-springboot-longpolling-starter:$telegramBotsVersion")
     implementation("org.telegram:telegrambots-client:$telegramBotsVersion")
     implementation("org.telegram:telegrambots-extensions:$telegramBotsVersion")
