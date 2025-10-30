@@ -17,8 +17,8 @@ class OpenAiService(private val chatClient: ChatClient) {
             .build()
 
         val chatOptions = OpenAiChatOptions.builder()
-            .model(OpenAiApi.ChatModel.GPT_4_1)
-            .temperature(0.0)
+            .model(OpenAiApi.ChatModel.GPT_5)
+            .temperature(1.0) // для GPT 5 температура всегда 1.0
             .responseFormat(responseFormat)
             .build()
 
